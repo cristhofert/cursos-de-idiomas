@@ -8,6 +8,11 @@ export const People = () => {
 	//const params = useParams();
 	return (
 		<div className="container">
+			<div className="row d-flex">
+				<Link className="btn btn-outline-primary" to="/people/add">
+					Add Person
+				</Link>
+			</div>
 			<table className="table">
 				<thead>
 					<tr>
@@ -29,7 +34,7 @@ export const People = () => {
 								<td>{person.last_name}</td>
 								<td>{person.email}</td>
 								<td>
-									<Link to={`/people/${person.id}/edit`} className="btn btn-primary">
+									<Link to={`/people/${person.id}/edit`} className="btn btn-warning">
 										Editar
 									</Link>
 								</td>

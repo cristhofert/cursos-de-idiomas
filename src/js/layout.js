@@ -11,6 +11,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { People } from "./views/people";
 import { PeopleEdit } from "./views/people_edit";
+import { PeopleCreate } from "./views/people_create";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +36,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/people/:id/edit">
 							<PeopleEdit />
+						</Route>
+						<Route exact path="/people/add">
+							<PeopleCreate />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

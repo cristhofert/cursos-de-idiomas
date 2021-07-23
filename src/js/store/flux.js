@@ -93,7 +93,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			people: {
-				add: person => {},
+				add: () => {
+					const store = getStore();
+					console.table(store.person);
+					setStore({ people: store.people.concat(store.person) });
+				},
 				update: () => {},
 				delete: id => {
 					console.log("DELEETE" + id);
@@ -120,6 +124,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				update: data => {
 					const store = getStore();
 					setStore({ person: { ...store.person, ...data } });
+				},
+				reset: () => {
+					setStore({ person: {} });
 				}
 			}
 		}
