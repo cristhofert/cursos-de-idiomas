@@ -12,6 +12,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
+			],
+			people: [
+				{
+					id: 0,
+					first_name: "string",
+					last_name: "string",
+					email: "user@example.com",
+					created_at: "2021-07-23T16:39:33.279Z",
+					updated_at: "2021-07-23T16:39:33.279Z",
+					courses: [
+						{
+							id: 0,
+							name: "string",
+							language_code: "string",
+							level_id: 0,
+							created_at: "2021-07-23T16:39:33.279Z",
+							updated_at: "2021-07-23T16:39:33.279Z",
+							level: {
+								id: 0,
+								name: "string"
+							},
+							language: {
+								code: "string",
+								name: "string"
+							}
+						}
+					]
+				}
 			]
 		},
 		actions: {
@@ -37,6 +65,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			loadPeople: () => {
+				/**
+					fetch().then().then(data => setStore({ "people": data.people }))
+				*/
+				fetch()
+					.then()
+					.then(data => setStore({ people: data.people }));
+			},
+			removePeople: index => {
+				console.log("DELEETE" + index);
 			}
 		}
 	};
