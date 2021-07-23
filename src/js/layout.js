@@ -12,6 +12,9 @@ import { Footer } from "./component/footer";
 import { People } from "./views/people";
 import { PeopleEdit } from "./views/people_edit";
 import { PeopleCreate } from "./views/people_create";
+import { Courses } from "./views/courses";
+import { Languages } from "./views/languages";
+import { Levels } from "./views/levels";
 
 //create your first component
 const Layout = () => {
@@ -39,6 +42,15 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/people/add">
 							<PeopleCreate />
+						</Route>
+						<Route exact path="/curses">
+							<Courses />
+						</Route>
+						<Route exact path="/languages">
+							<Languages />
+						</Route>
+						<Route exact path="/levels">
+							<Levels />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

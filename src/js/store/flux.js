@@ -66,7 +66,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					}
 				]
-			}
+			},
+			courses: [
+				{
+					id: 0,
+					name: "string",
+					language_code: "string",
+					level_id: 0,
+					created_at: "2021-07-23T21:24:52.805Z",
+					updated_at: "2021-07-23T21:24:52.805Z",
+					level: {
+						id: 0,
+						name: "string"
+					},
+					language: {
+						code: "string",
+						name: "string"
+					}
+				}
+			],
+			languages: [
+				{
+					code: "string",
+					name: "string"
+				}
+			],
+			levels: [
+				{
+					code: "string",
+					name: "string"
+				}
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction

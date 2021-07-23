@@ -8,11 +8,6 @@ export const People = () => {
 	//const params = useParams();
 	return (
 		<div className="container">
-			<div className="row d-flex">
-				<Link className="btn btn-outline-primary" to="/people/add">
-					Add Person
-				</Link>
-			</div>
 			<table className="table">
 				<thead>
 					<tr>
