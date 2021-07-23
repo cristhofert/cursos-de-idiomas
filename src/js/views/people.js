@@ -37,7 +37,7 @@ export const People = () => {
 									<button
 										className="btn btn-danger"
 										onClick={() => {
-											actions.removePeople(person.id);
+											actions.people.delete(person.id);
 										}}>
 										Borrar
 									</button>

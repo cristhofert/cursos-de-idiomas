@@ -40,7 +40,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					]
 				}
-			]
+			],
+			person: {
+				id: 0,
+				first_name: "string",
+				last_name: "string",
+				email: "user@example.com",
+				created_at: "2021-07-23T16:39:33.279Z",
+				updated_at: "2021-07-23T16:39:33.279Z",
+				courses: [
+					{
+						id: 0,
+						name: "string",
+						language_code: "string",
+						level_id: 0,
+						created_at: "2021-07-23T16:39:33.279Z",
+						updated_at: "2021-07-23T16:39:33.279Z",
+						level: {
+							id: 0,
+							name: "string"
+						},
+						language: {
+							code: "string",
+							name: "string"
+						}
+					}
+				]
+			}
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -66,16 +92,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			loadPeople: () => {
-				/**
-					fetch().then().then(data => setStore({ "people": data.people }))
-				*/
-				fetch()
-					.then()
-					.then(data => setStore({ people: data.people }));
+			people: {
+				add: person => {},
+				update: () => {},
+				delete: id => {
+					console.log("DELEETE" + id);
+				},
+				load: () => {
+					fetch()
+						.then()
+						.then(data => setStore({ people: data.people }));
+				}
 			},
-			removePeople: index => {
-				console.log("DELEETE" + index);
+			person: {
+				load: id => {
+					setStore({
+						person: {
+							id: id,
+							first_name: "string",
+							last_name: "string",
+							email: "user@example.com",
+							created_at: "2021-07-23T16:39:33.279Z",
+							updated_at: "2021-07-23T16:39:33.279Z"
+						}
+					});
+				},
+				update: data => {
+					const store = getStore();
+					setStore({ person: { ...store.person, ...data } });
+				}
 			}
 		}
 	};
