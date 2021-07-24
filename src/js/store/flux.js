@@ -200,7 +200,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then(result => console.table(result))
 						.catch(error => console.log("error", error));
 				},
-				update: () => {},
+				update: () => {
+					const store = getStore();
+					var myHeaders = new Headers();
+					myHeaders.append("Content-Type", "application/json");
+					myHeaders.append(
+						"Cookie",
+						"XSRF-TOKEN=eyJpdiI6IldHRXc2bmwwdGdqVkMzSVRiRWdYXC9BPT0iLCJ2YWx1ZSI6Inlxc1dIbGRVZ1hjNUw3MXR0d3psRzFTdU5HKzYxS3V2T3d3M0JjWTJrM3dBR2oxellGMW1NQTFiaFFIWFlvd1YiLCJtYWMiOiI1MDlhZmYxMzUyNzc0YTBiZDA1NzQ0ODJkMWVjYWZkYWRlOWM4ODE1Njg3MTBlMjgxMzY0MmEwMDVhNTAxNjIxIn0%3D; laravel_session=eyJpdiI6IlpXT3lNOVk1RVg0eEMraDlGOHdNcEE9PSIsInZhbHVlIjoiRjZjS0JuMXMwZjF0K05KOVFYd1h1SzNRd0d6WTlnQjVjc0w4R3pBQmhSUGl6SitZTkVvbWR6VFhJNDdcL1NDd0IiLCJtYWMiOiI5MGU5OTE3YTAyYTM1ZWM1ZTY1ZGFhYjMxYjE0N2FmZTUxYTA2OTBkODI0NDBkYmYxYjVhMGMxNmI0ODA5MDVjIn0%3D"
+					);
+
+					var raw = JSON.stringify(store.person);
+
+					var requestOptions = {
+						method: "PUT",
+						headers: myHeaders,
+						body: raw,
+						redirect: "follow"
+					};
+
+					return fetch(`http://ctravieso.challenge.trinom.io/api/people/${store.person.id}`, requestOptions)
+						.then(response => response.json())
+						.then(result => console.table(result))
+						.catch(error => console.log("error", error));
+				},
 				delete: id => {
 					console.log("DELEETE" + id);
 				},
@@ -245,6 +267,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				update: data => {
 					const store = getStore();
 					setStore({ person: { ...store.person, ...data } });
+					console.table("update", data);
 				},
 				reset: () => {
 					setStore({

@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const PeopleEdit = () => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	const history = useHistory();
 
 	useEffect(() => {
 		actions.person.load(params.id);
@@ -16,7 +17,9 @@ export const PeopleEdit = () => {
 			<form
 				onSubmit={event => {
 					event.preventDefault();
-					actions.people.update();
+					actions.people.update().then(() => {
+						history.push("/people");
+					});
 				}}>
 				<div className="form-group">
 					<label htmlFor="email">Email address</label>
@@ -38,7 +41,7 @@ export const PeopleEdit = () => {
 						id="first_name"
 						placeholder="First Name"
 						value={store.person.first_name}
-						onCange={event => actions.person.update({ first_name: event.target.value })}
+						onChange={event => actions.person.update({ first_name: event.target.value })}
 					/>
 				</div>
 				<div className="form-group">

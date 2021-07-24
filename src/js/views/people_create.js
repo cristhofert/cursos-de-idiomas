@@ -41,7 +41,7 @@ export const PeopleCreate = () => {
 						id="first_name"
 						placeholder="First Name"
 						value={store.person.first_name}
-						onCange={event => actions.person.update({ first_name: event.target.value })}
+						onChange={event => actions.person.update({ first_name: event.target.value })}
 					/>
 				</div>
 				<div className="form-group">
