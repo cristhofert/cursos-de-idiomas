@@ -6,13 +6,11 @@ import { Context } from "../store/appContext";
 export const Courses = () => {
 	const { store, actions } = useContext(Context);
 	//const params = useParams();
+	useEffect(() => {
+		actions.loadCourses();
+	}, []);
 	return (
 		<div className="container">
-			<div className="row d-flex">
-				<Link className="btn btn-outline-primary" to="/people/add">
-					Add Person
-				</Link>
-			</div>
 			<table className="table">
 				<thead>
 					<tr>

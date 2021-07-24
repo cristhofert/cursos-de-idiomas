@@ -6,6 +6,9 @@ import { Context } from "../store/appContext";
 export const Languages = () => {
 	const { store, actions } = useContext(Context);
 	//const params = useParams();
+	useEffect(() => {
+		actions.loadLanguages();
+	}, []);
 	return (
 		<div className="container">
 			<table className="table">

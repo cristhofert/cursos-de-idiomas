@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const PeopleCreate = () => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
+	const history = useHistory();
 
 	useEffect(() => {
 		actions.person.reset();
@@ -16,7 +17,9 @@ export const PeopleCreate = () => {
 			<form
 				onSubmit={event => {
 					event.preventDefault();
-					actions.people.add();
+					actions.people.add().then(() => {
+						history.push("/people");
+					});
 				}}>
 				<div className="form-group">
 					<label htmlFor="email">Email address</label>

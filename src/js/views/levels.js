@@ -6,12 +6,15 @@ import { Context } from "../store/appContext";
 export const Levels = () => {
 	const { store, actions } = useContext(Context);
 	//const params = useParams();
+	useEffect(() => {
+		actions.loadLevels();
+	}, []);
 	return (
 		<div className="container">
 			<table className="table">
 				<thead>
 					<tr>
-						<th scope="col">Code</th>
+						<th scope="col">Id</th>
 						<th scope="col">Name</th>
 					</tr>
 				</thead>
@@ -20,7 +23,7 @@ export const Levels = () => {
 						console.table(level);
 						return (
 							<tr key={level.id}>
-								<th scope="row">{level.code}</th>
+								<th scope="row">{level.id}</th>
 								<td>{level.name}</td>
 							</tr>
 						);

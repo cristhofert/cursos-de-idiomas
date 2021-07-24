@@ -6,8 +6,16 @@ import { Context } from "../store/appContext";
 export const People = () => {
 	const { store, actions } = useContext(Context);
 	//const params = useParams();
+	useEffect(() => {
+		actions.people.load();
+	}, []);
 	return (
 		<div className="container">
+			<div className="row d-flex">
+				<Link className="btn btn-outline-primary" to="/people/add">
+					Add Person
+				</Link>
+			</div>
 			<table className="table">
 				<thead>
 					<tr>
