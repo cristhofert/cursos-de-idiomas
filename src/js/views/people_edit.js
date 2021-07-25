@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { CoursesList } from "../component/coursesList";
 
 export const PeopleEdit = () => {
 	const { store, actions } = useContext(Context);
@@ -61,6 +62,8 @@ export const PeopleEdit = () => {
 					Submit
 				</button>
 			</form>
+			<br />
+			<CoursesList />
 		</div>
 	);
 };

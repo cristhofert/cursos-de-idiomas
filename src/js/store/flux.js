@@ -96,7 +96,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					code: "string",
 					name: "string"
 				}
-			]
+			],
+			selectedCourse: 1
 		},
 		actions: {
 			loadCourses: () => {
@@ -152,29 +153,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => setStore({ levels: result }))
 					.catch(error => console.log("error", error));
-			},
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
 			},
 			people: {
 				add: () => {
@@ -261,7 +239,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					fetch(`http://ctravieso.challenge.trinom.io/api/people/${id}`, requestOptions)
 						.then(response => response.json())
-						.then(result => setStore({ person: result }))
+						.then(result => {
+							console.table(result);
+							setStore({ person: result });
+						})
+
 						.catch(error => console.log("error", error));
 				},
 				update: data => {
@@ -277,7 +259,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 							email: ""
 						}
 					});
+				},
+				deleteCourse: id => {
+					const store = getStore();
+					store.person.courses = store.person.courses.filter(course => course.id !== id);
+					setStore({ person: store.person });
+				},
+				addCourse: () => {
+					console.log("addCourse");
+					const store = getStore();
+					console.log(store.selectedCourse);
+					console.table(store.courses[store.selectedCourse]);
+					store.person.courses = [...store.person.courses, store.courses[store.selectedCourse]];
+					setStore({ person: store.person });
+					console.log("person", store.person);
 				}
+			},
+			setSelectedCourse: event => {
+				console.log("setSelectedCourse", event);
+				const store = getStore();
+				setStore({ selectedCourse: event.target.value });
+				console.log("SLECETOR" + store.selectedCourse);
 			}
 		}
 	};
