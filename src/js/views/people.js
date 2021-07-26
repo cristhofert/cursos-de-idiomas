@@ -32,7 +32,6 @@ export const People = () => {
 				</thead>
 				<tbody>
 					{store.people.map(person => {
-						console.table(person);
 						return (
 							<tr key={person.id}>
 								<th scope="row">{person.id}</th>
@@ -63,7 +62,7 @@ export const People = () => {
 									<button
 										className="btn btn-danger"
 										onClick={() => {
-											actions.people.delete(person.id);
+											actions.people.delete(person.id).then(result => actions.people.load());
 										}}>
 										<i className="fa fa-trash-alt" />
 									</button>

@@ -202,7 +202,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.catch(error => console.log("error", error));
 				},
 				delete: id => {
-					console.log("DELEETE" + id);
+					var requestOptions = {
+						method: "DELETE",
+						body: "",
+						redirect: "follow"
+					};
+
+					return fetch(`${process.env.API}/api/people/${id}`, requestOptions)
+						.then(response => response.text())
+						.then(result => console.log(result))
+						.catch(error => console.log("error", error));
 				},
 				load: () => {
 					var myHeaders = new Headers();
