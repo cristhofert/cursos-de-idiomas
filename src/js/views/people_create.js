@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { CoursesList } from "../component/coursesList";
 
 export const PeopleCreate = () => {
 	const { store, actions } = useContext(Context);
@@ -14,13 +14,7 @@ export const PeopleCreate = () => {
 
 	return (
 		<div className="container">
-			<form
-				onSubmit={event => {
-					event.preventDefault();
-					actions.people.add().then(() => {
-						history.push("/people");
-					});
-				}}>
+			<form>
 				<div className="form-group">
 					<label htmlFor="email">Email address</label>
 					<input
@@ -57,10 +51,18 @@ export const PeopleCreate = () => {
 						onChange={event => actions.person.update({ last_name: event.target.value })}
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary">
-					Submit
-				</button>
 			</form>
+			<CoursesList />
+			<br />
+			<button
+				className="btn btn-primary"
+				onClick={event => {
+					actions.people.add().then(() => {
+						history.push("/people");
+					});
+				}}>
+				Submit
+			</button>
 		</div>
 	);
 };

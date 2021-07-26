@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 export const CoursesList = () => {
@@ -9,12 +9,12 @@ export const CoursesList = () => {
 	}, []);
 	return (
 		<ul className="list-group">
-			<li className="list-group-item" key={0}>
+			<li className="list-group-item">
 				<strong>Courses</strong>
 			</li>
 			{store.person.courses && store.person.courses.length != 0 ? (
-				store.person.courses.map(course => (
-					<li className="list-group-item d-flex justify-content-between" key={course.id}>
+				store.person.courses.map((course, i) => (
+					<li className="list-group-item d-flex justify-content-between" key={i}>
 						<p>{course.name}</p>
 						<button className="btn btn-danger" onClick={() => actions.person.deleteCourse(course.id)}>
 							X
@@ -22,13 +22,10 @@ export const CoursesList = () => {
 					</li>
 				))
 			) : (
-				<li className="list-group-item" key={1}>
-					No hay cursos
-				</li>
+				<li className="list-group-item">No hay cursos</li>
 			)}
-			<li className="list-group-item d-flex justify-content-between">
-				<p>Agregar: </p>
-				<select className="custom-select m-1" value={store.selectedCourse} onChange={actions.setSelectedCourse}>
+			<li className="list-group-item d-flex justify-content-between p-2">
+				<select className="custom-select" value={store.selectedCourse} onChange={actions.setSelectedCourse}>
 					{store.courses.map((course, index) => (
 						<option key={index} value={index}>
 							{course.name}

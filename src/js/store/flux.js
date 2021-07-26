@@ -113,7 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("http://ctravieso.challenge.trinom.io/api/courses", requestOptions)
+				fetch(`${process.env.API}/api/courses`, requestOptions)
 					.then(response => response.json())
 					.then(result => setStore({ courses: result }))
 					.catch(error => console.log("error", error));
@@ -131,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("http://ctravieso.challenge.trinom.io/api/languages", requestOptions)
+				fetch(`${process.env.API}/api/languages`, requestOptions)
 					.then(response => response.json())
 					.then(result => setStore({ languages: result }))
 					.catch(error => console.log("error", error));
@@ -149,7 +149,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("http://ctravieso.challenge.trinom.io/api/levels", requestOptions)
+				fetch(`${process.env.API}/api/levels`, requestOptions)
 					.then(response => response.json())
 					.then(result => setStore({ levels: result }))
 					.catch(error => console.log("error", error));
@@ -173,7 +173,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						redirect: "follow"
 					};
 
-					return fetch("http://ctravieso.challenge.trinom.io/api/people", requestOptions)
+					return fetch(`${process.env.API}/api/people`, requestOptions)
 						.then(response => response.json())
 						.then(result => console.table(result))
 						.catch(error => console.log("error", error));
@@ -196,7 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						redirect: "follow"
 					};
 
-					return fetch(`http://ctravieso.challenge.trinom.io/api/people/${store.person.id}`, requestOptions)
+					return fetch(`${process.env.API}/api/people/${store.person.id}`, requestOptions)
 						.then(response => response.json())
 						.then(result => console.table(result))
 						.catch(error => console.log("error", error));
@@ -217,7 +217,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						redirect: "follow"
 					};
 
-					fetch("http://ctravieso.challenge.trinom.io/api/people", requestOptions)
+					fetch(`${process.env.API}/api/people`, requestOptions)
 						.then(response => response.json())
 						.then(result => setStore({ people: result.data }))
 						.catch(error => console.log("error", error));
@@ -237,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						redirect: "follow"
 					};
 
-					fetch(`http://ctravieso.challenge.trinom.io/api/people/${id}`, requestOptions)
+					fetch(`${process.env.API}/api/people/${id}`, requestOptions)
 						.then(response => response.json())
 						.then(result => {
 							console.table(result);
@@ -256,7 +256,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						person: {
 							first_name: "",
 							last_name: "",
-							email: ""
+							email: "",
+							courses: []
 						}
 					});
 				},
@@ -266,13 +267,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ person: store.person });
 				},
 				addCourse: () => {
-					console.log("addCourse");
 					const store = getStore();
-					console.log(store.selectedCourse);
-					console.table(store.courses[store.selectedCourse]);
-					store.person.courses = [...store.person.courses, store.courses[store.selectedCourse]];
-					setStore({ person: store.person });
-					console.log("person", store.person);
+					const courses = store.person.courses.filter(course => {
+						return course.id == store.courses[store.selectedCourse].id;
+					});
+					console.log("courses", courses);
+					if (courses.length === 0) {
+						store.person.courses = [...store.person.courses, store.courses[store.selectedCourse]];
+						setStore({ person: store.person });
+					}
 				}
 			},
 			setSelectedCourse: event => {
