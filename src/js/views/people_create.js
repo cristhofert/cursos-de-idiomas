@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CoursesList } from "../component/coursesList";
@@ -7,6 +7,7 @@ export const PeopleCreate = () => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 	const history = useHistory();
+	const [alert, setAlert] = useState("");
 
 	useEffect(() => {
 		actions.person.reset();
@@ -14,6 +15,7 @@ export const PeopleCreate = () => {
 
 	return (
 		<div className="container">
+			{alert === "" ? null : <div className="alert alert-danger">{alert}</div>}
 			<form>
 				<div className="form-group">
 					<label htmlFor="email">Email address</label>
@@ -57,9 +59,14 @@ export const PeopleCreate = () => {
 			<button
 				className="btn btn-primary"
 				onClick={event => {
-					actions.people.add().then(() => {
-						history.push("/people");
-					});
+					actions.people
+						.add()
+						.then(() => {
+							history.push("/people");
+						})
+						.catch(error => {
+							setAlert("Incorrect data");
+						});
 				}}>
 				Submit
 			</button>

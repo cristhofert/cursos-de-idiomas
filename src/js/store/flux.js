@@ -175,8 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return fetch(`${process.env.API}/api/people`, requestOptions)
 						.then(response => response.json())
-						.then(result => console.table(result))
-						.catch(error => console.log("error", error));
+						.then(result => console.table(result));
 				},
 				update: () => {
 					const store = getStore();
@@ -198,8 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return fetch(`${process.env.API}/api/people/${store.person.id}`, requestOptions)
 						.then(response => response.json())
-						.then(result => console.table(result))
-						.catch(error => console.log("error", error));
+						.then(result => console.table(result));
 				},
 				delete: id => {
 					var requestOptions = {
@@ -252,7 +250,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							console.table(result);
 							setStore({ person: result });
 						})
-
 						.catch(error => console.log("error", error));
 				},
 				update: data => {
@@ -288,10 +285,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			setSelectedCourse: event => {
-				console.log("setSelectedCourse", event);
-				const store = getStore();
 				setStore({ selectedCourse: event.target.value });
-				console.log("SLECETOR" + store.selectedCourse);
 			}
 		}
 	};

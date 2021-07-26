@@ -11,25 +11,27 @@ export const Levels = () => {
 	}, []);
 	return (
 		<div className="container">
-			<table className="table">
-				<thead>
-					<tr>
-						<th scope="col">Id</th>
-						<th scope="col">Name</th>
-					</tr>
-				</thead>
-				<tbody>
-					{store.levels.map(level => {
-						console.table(level);
-						return (
-							<tr key={level.id}>
-								<th scope="row">{level.id}</th>
-								<td>{level.name}</td>
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+			<div className="table-responsive-sm">
+				<table className="table">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						{store.levels.map(level => {
+							console.table(level);
+							return (
+								<tr key={level.id}>
+									<th scope="row">{level.id}</th>
+									<td>{level.name}</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	);
 };
