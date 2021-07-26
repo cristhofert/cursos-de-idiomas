@@ -18,8 +18,8 @@ export const Courses = () => {
 						<th scope="col">Name</th>
 						<th scope="col">Language</th>
 						<th scope="col">Level</th>
-						<th scope="col">Actions</th>
-						<th scope="col">Actions</th>
+						<th scope="col">Created at</th>
+						<th scope="col">Updated at</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,6 +31,14 @@ export const Courses = () => {
 								<td>{course.name}</td>
 								<td>{course.language.name}</td>
 								<td>{course.level.name}</td>
+								<td>{course.created_at}</td>
+								<td>
+									{course.updated_at ? (
+										course.updated_at
+									) : (
+										<p className="text-secondary">not updated yet</p>
+									)}
+								</td>
 							</tr>
 						);
 					})}
